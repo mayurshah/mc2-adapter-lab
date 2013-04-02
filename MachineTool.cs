@@ -37,6 +37,9 @@ namespace AdapterLab
 
         Event mMode = new Event("mode");
         Event mExec = new Event("exec");
+
+        Event mProgram = new Event("program");
+        Message mMessage = new Message("message");
         
         public MachineTool()
         {
@@ -50,6 +53,9 @@ namespace AdapterLab
 
             mAdapter.AddDataItem(mMode);
             mAdapter.AddDataItem(mExec);
+
+            mAdapter.AddDataItem(mProgram);
+            mAdapter.AddDataItem(mMessage);
         }
 
         private void start_Click(object sender, EventArgs e)
@@ -98,6 +104,14 @@ namespace AdapterLab
                 mExec.Value = "FEED_HOLD";
             else
                 mExec.Value = "READY";
+
+            mProgram.Value = program.Text;
+
+            if (messageCode.Text.Length > 0)
+            {
+                mMessage.Code = messageCode.Text;
+                mMessage.Value = messageText.Text;
+            }
 
             mAdapter.SendChanged();
         }
