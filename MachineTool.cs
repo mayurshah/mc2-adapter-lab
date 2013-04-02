@@ -40,6 +40,9 @@ namespace AdapterLab
 
         Event mProgram = new Event("program");
         Message mMessage = new Message("message");
+
+        Sample mPosition = new Sample("position");
+        Sample mLoad = new Sample("load");
         
         public MachineTool()
         {
@@ -56,6 +59,9 @@ namespace AdapterLab
 
             mAdapter.AddDataItem(mProgram);
             mAdapter.AddDataItem(mMessage);
+
+            mAdapter.AddDataItem(mPosition);
+            mAdapter.AddDataItem(mLoad);
         }
 
         private void start_Click(object sender, EventArgs e)
@@ -113,6 +119,9 @@ namespace AdapterLab
                 mMessage.Value = messageText.Text;
             }
 
+            mLoad.Value = load.Value;
+            mPosition.Value = position.Value;
+
             mAdapter.SendChanged();
         }
 
@@ -123,6 +132,9 @@ namespace AdapterLab
 
         private void position_Scroll(object sender, ScrollEventArgs e)
         {
+            mPosition.Value = position.Value;
+            mAdapter.SendChanged();
+
             positionValue.Text = position.Value.ToString();
         }
 
