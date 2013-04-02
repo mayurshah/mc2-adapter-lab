@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MTConnectDevices xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.2' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:mtconnect.org:MTConnectDevices:1.2' xsi:schemaLocation='urn:mtconnect.org:MTConnectDevices:1.2 http://www.mtconnect.org/schemas/MTConnectDevices_1.2.xsd'>
+  <Header creationTime='2013-04-02T03:40:04Z' assetBufferSize='1024' sender='localhost' assetCount='0' version='1.2' instanceId='0' bufferSize='131072'/>
+  <Devices>
+    <Device name='MC2_LAB' uuid='MC2_LAB' id='MC2_LAB_1'>
+      <Description model='LAB' manufacturer='MTC'>MTConnect Lab Machine - Machine</Description>
+      <DataItems>
+        <DataItem type='EMERGENCY_STOP' category='EVENT' id='dtop_2' name='estop'/>
+        <DataItem type='AVAILABILITY' category='EVENT' id='dtop_3' name='avail'/>
+      </DataItems>
+      <Components>
+        <Axes name='axes' id='axes_4'>
+          <Components>
+            <Linear name='X' id='X_5'>
+              <DataItems>
+                <DataItem type='LOAD' category='SAMPLE' id='X_6' name='load' units='PERCENT' nativeUnits='PERCENT'/>
+                <DataItem type='POSITION' category='SAMPLE' id='X_7' name='position' subType='ACTUAL' units='MILLIMETER' nativeUnits='INCH' coordinateSystem='MACHINE'/>
+                <DataItem type='POSITION' category='CONDITION' id='X_8' name='travel'/>
+                <DataItem type='LOAD' category='CONDITION' id='X_9' name='overload'/>
+              </DataItems>
+            </Linear>
+          </Components>
+        </Axes>
+        <Controller name='controller' id='controller_10'>
+          <DataItems>
+            <DataItem type='CONTROLER_MODE' category='EVENT' id='controller_11' name='mode'/>
+            <DataItem type='EXECUTION' category='EVENT' id='controller_12' name='exec'/>
+            <DataItem type='PROGRAM_NAME' category='EVENT' id='controller_13' name='program'/>
+            <DataItem type='MESSAGE' category='EVENT' id='controller_14' name='message'/>
+            <DataItem type='SYSTEM' category='CONDITION' id='controller_15' name='system'/>
+            <DataItem type='TEMPERATURE' category='CONDITION' id='controller_16' name='temp'/>
+          </DataItems>
+        </Controller>
+        <Systems name='systems' id='systems_17'>
+          <Components>
+            <Coolant name='coolant' id='coolant_18'>
+              <DataItems>
+                <DataItem type='FILL_LEVEL' category='CONDITION' id='coolant_19' name='cool_low'/>
+              </DataItems>
+            </Coolant>
+          </Components>
+        </Systems>
+        <Sensor name='audio' id='audio_20'>
+          <DataItems>
+            <DataItem type='DISPLACEMENT' category='SAMPLE' id='audio_21' name='audio' units='SOUND_LEVEL' representation='TIME_SERIES' sampleRate='1000'/>
+          </DataItems>
+        </Sensor>
+      </Components>
+    </Device>
+  </Devices>
+</MTConnectDevices>
