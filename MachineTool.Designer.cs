@@ -56,7 +56,7 @@
             this.load = new System.Windows.Forms.HScrollBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.flazBat = new System.Windows.Forms.CheckBox();
-            this.axis = new System.Windows.Forms.CheckBox();
+            this.travel = new System.Windows.Forms.CheckBox();
             this.something = new System.Windows.Forms.CheckBox();
             this.overtemp = new System.Windows.Forms.CheckBox();
             this.coolant = new System.Windows.Forms.CheckBox();
@@ -66,10 +66,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.messageCode = new System.Windows.Forms.TextBox();
-            this.messageText = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.messageText = new System.Windows.Forms.TextBox();
+            this.messageCode = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.mode.SuspendLayout();
             this.Execution.SuspendLayout();
@@ -330,7 +330,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.flazBat);
-            this.groupBox3.Controls.Add(this.axis);
+            this.groupBox3.Controls.Add(this.travel);
             this.groupBox3.Controls.Add(this.something);
             this.groupBox3.Controls.Add(this.overtemp);
             this.groupBox3.Controls.Add(this.coolant);
@@ -353,15 +353,15 @@
             this.flazBat.Text = "FLAZ BAT";
             this.flazBat.UseVisualStyleBackColor = true;
             // 
-            // axis
+            // travel
             // 
-            this.axis.AutoSize = true;
-            this.axis.Location = new System.Drawing.Point(151, 89);
-            this.axis.Name = "axis";
-            this.axis.Size = new System.Drawing.Size(155, 17);
-            this.axis.TabIndex = 5;
-            this.axis.Text = "FM_1_Achse_Positionierun";
-            this.axis.UseVisualStyleBackColor = true;
+            this.travel.AutoSize = true;
+            this.travel.Location = new System.Drawing.Point(151, 89);
+            this.travel.Name = "travel";
+            this.travel.Size = new System.Drawing.Size(155, 17);
+            this.travel.TabIndex = 5;
+            this.travel.Text = "FM_1_Achse_Positionierun";
+            this.travel.UseVisualStyleBackColor = true;
             // 
             // something
             // 
@@ -449,19 +449,14 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Message";
             // 
-            // messageCode
+            // label8
             // 
-            this.messageCode.Location = new System.Drawing.Point(50, 23);
-            this.messageCode.Name = "messageCode";
-            this.messageCode.Size = new System.Drawing.Size(62, 20);
-            this.messageCode.TabIndex = 13;
-            // 
-            // messageText
-            // 
-            this.messageText.Location = new System.Drawing.Point(151, 23);
-            this.messageText.Name = "messageText";
-            this.messageText.Size = new System.Drawing.Size(215, 20);
-            this.messageText.TabIndex = 14;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(118, 26);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(28, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Text";
             // 
             // label7
             // 
@@ -472,14 +467,19 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "Code";
             // 
-            // label8
+            // messageText
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(118, 26);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(28, 13);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "Text";
+            this.messageText.Location = new System.Drawing.Point(151, 23);
+            this.messageText.Name = "messageText";
+            this.messageText.Size = new System.Drawing.Size(215, 20);
+            this.messageText.TabIndex = 14;
+            // 
+            // messageCode
+            // 
+            this.messageCode.Location = new System.Drawing.Point(50, 23);
+            this.messageCode.Name = "messageCode";
+            this.messageCode.Size = new System.Drawing.Size(62, 20);
+            this.messageCode.TabIndex = 13;
             // 
             // MachineTool
             // 
@@ -549,7 +549,7 @@
         private System.Windows.Forms.CheckBox overload;
         private System.Windows.Forms.CheckBox overtemp;
         private System.Windows.Forms.CheckBox something;
-        private System.Windows.Forms.CheckBox axis;
+        private System.Windows.Forms.CheckBox travel;
         private System.Windows.Forms.Timer gather;
         private System.Windows.Forms.CheckBox flazBat;
         private System.Windows.Forms.Button button1;
