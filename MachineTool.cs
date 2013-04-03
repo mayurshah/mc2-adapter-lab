@@ -80,6 +80,14 @@ namespace AdapterLab
 
             mAdapter.AddDataItem(mAudio);
 
+            int count = WaveIn.DeviceCount;
+            for (int dev = 0; dev < count; dev++)
+            {
+                WaveInCapabilities deviceInfo = WaveIn.GetCapabilities(dev);
+                Console.WriteLine("Device {0}: {1}, {2} channels",
+                    dev, deviceInfo.ProductName, deviceInfo.Channels);
+            }
+
             mWave = new WaveIn();
             mWave.DeviceNumber = 0;
             mWave.WaveFormat = new WaveFormat(1000, 1);
