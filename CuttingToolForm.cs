@@ -27,11 +27,11 @@ namespace AdapterLab
 {
     using MTConnect;
 
-    public partial class CuttingTool : Form
+    public partial class CuttingToolForm : Form
     {
         Adapter mAdapter;
 
-        public CuttingTool(Adapter adapter)
+        public CuttingToolForm(Adapter adapter)
         {
             InitializeComponent();
             mAdapter = adapter;

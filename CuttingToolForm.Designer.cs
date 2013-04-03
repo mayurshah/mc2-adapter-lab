@@ -1,6 +1,6 @@
 ﻿namespace AdapterLab
 {
-    partial class CuttingTool
+    partial class CuttingToolForm
     {
         /// <summary>
         /// Required designer variable.
