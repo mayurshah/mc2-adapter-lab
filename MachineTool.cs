@@ -50,6 +50,8 @@ namespace AdapterLab
         Condition mTravel = new Condition("travel");
         Condition mFillLevel = new Condition("cool_low", true);
 
+        TimeSeries mAudio = new TimeSeries("audio", 1000);
+        WaveIn mWave;
         
         public MachineTool()
         {
@@ -75,6 +77,13 @@ namespace AdapterLab
             mAdapter.AddDataItem(mOverload);
             mAdapter.AddDataItem(mTravel);
             mAdapter.AddDataItem(mFillLevel);
+
+            mAdapter.AddDataItem(mAudio);
+
+            mWave = new WaveIn();
+            mWave.DeviceNumber = 0;
+            mWave.WaveFormat = new WaveFormat(1000, 1);
+            mWave.DataAvailable += waveIn_DataAvailable;
         }
 
         private void start_Click(object sender, EventArgs e)
@@ -96,6 +105,8 @@ namespace AdapterLab
             mOverload.Normal();
             mTravel.Normal();
             mFillLevel.Normal();
+
+            mWave.StartRecording();
         }
 
         private void stop_Click(object sender, EventArgs e)
@@ -105,6 +116,8 @@ namespace AdapterLab
             stop.Enabled = false;
             start.Enabled = true;
             gather.Enabled = false;
+
+            mWave.StopRecording();
         }
 
         private void gather_Tick(object sender, EventArgs e)
@@ -186,6 +199,15 @@ namespace AdapterLab
 
         void waveIn_DataAvailable(object sender, WaveInEventArgs e)
         {
+            double[] samples = new double[e.BytesRecorded / 2];
+            for (int i = 0; i < e.BytesRecorded; i += 2)
+            {
+                short sample = (short)((e.Buffer[i + 1] << 8) |
+                                e.Buffer[i]);
+                samples[i / 2] = sample / 32768.0;
+            }
+            mAudio.Values = samples;
+            mAdapter.SendChanged();
         }
      }
 }
