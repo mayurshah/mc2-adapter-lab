@@ -4,3 +4,5 @@ obj
 System.pdb
 TestResults
 *.suo
+*.exe
+*.obj
