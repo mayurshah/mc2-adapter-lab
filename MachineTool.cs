@@ -43,6 +43,13 @@ namespace AdapterLab
 
         Sample mPosition = new Sample("position");
         Sample mLoad = new Sample("load");
+
+        Condition mSystem = new Condition("system");
+        Condition mTemp = new Condition("temp");
+        Condition mOverload = new Condition("overload");
+        Condition mTravel = new Condition("travel");
+        Condition mFillLevel = new Condition("cool_low", true);
+
         
         public MachineTool()
         {
@@ -62,6 +69,12 @@ namespace AdapterLab
 
             mAdapter.AddDataItem(mPosition);
             mAdapter.AddDataItem(mLoad);
+
+            mAdapter.AddDataItem(mSystem);
+            mAdapter.AddDataItem(mTemp);
+            mAdapter.AddDataItem(mOverload);
+            mAdapter.AddDataItem(mTravel);
+            mAdapter.AddDataItem(mFillLevel);
         }
 
         private void start_Click(object sender, EventArgs e)
@@ -77,6 +90,12 @@ namespace AdapterLab
             // Start our periodic timer
             gather.Interval = 1000;
             gather.Enabled = true;
+
+            mSystem.Normal();
+            mTemp.Normal();
+            mOverload.Normal();
+            mTravel.Normal();
+            mFillLevel.Normal();
         }
 
         private void stop_Click(object sender, EventArgs e)
@@ -122,6 +141,18 @@ namespace AdapterLab
             mLoad.Value = load.Value;
             mPosition.Value = position.Value;
 
+            if (flazBat.Checked)
+                mSystem.Add(Condition.Level.FAULT, "Yur Flaz Bat is flapping", "FLAZBAT");
+            if (something.Checked)
+                mSystem.Add(Condition.Level.WARNING, "Something went wrong", "AKAK");
+
+            if (overtemp.Checked)
+                mTemp.Add(Condition.Level.WARNING, "Temperature is too high", "OT");
+            if (overload.Checked)
+                mOverload.Add(Condition.Level.FAULT, "Axis overload", "OL");
+            if (travel.Checked)
+                mTravel.Add(Condition.Level.FAULT, "Travel outside boundaries", "OP");
+
             mAdapter.SendChanged();
         }
 
@@ -140,6 +171,11 @@ namespace AdapterLab
 
         private void coolant_CheckedChanged(object sender, EventArgs e)
         {
+            if (coolant.Checked)
+                mFillLevel.Add(Condition.Level.WARNING, "Coolant Low", "COOL", "LOW");
+            else
+                mFillLevel.Clear("COOL");
+            mAdapter.SendChanged();
         }
 
         private void button1_Click(object sender, EventArgs e)
