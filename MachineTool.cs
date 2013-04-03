@@ -87,7 +87,7 @@ namespace AdapterLab
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CuttingTool toolWindow = new CuttingTool(mAdapter);
+            CuttingToolForm toolWindow = new CuttingToolForm(mAdapter);
             toolWindow.Show(this);
         }
 
