@@ -52,11 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CuttingTool.cs">
+    <Compile Include="CuttingToolForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CuttingTool.Designer.cs">
-      <DependentUpon>CuttingTool.cs</DependentUpon>
+    <Compile Include="CuttingToolForm.Designer.cs">
+      <DependentUpon>CuttingToolForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MTCAsset.cs" />
     <Compile Include="MTCCuttingTool.cs" />
@@ -70,8 +70,8 @@
     <Compile Include="MTCAdapter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CuttingTool.resx">
-      <DependentUpon>CuttingTool.cs</DependentUpon>
+    <EmbeddedResource Include="CuttingToolForm.resx">
+      <DependentUpon>CuttingToolForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MachineTool.resx">
       <DependentUpon>MachineTool.cs</DependentUpon>
