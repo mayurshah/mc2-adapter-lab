@@ -70,8 +70,8 @@ int main(int argc, char **argv)
       fwrite(buffer, 1, count, stdout);
   }
 
-  WSACleanup();
 	closesocket(sd);
+  WSACleanup();
 	
   return 0;
 }
