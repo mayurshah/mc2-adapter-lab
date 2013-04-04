@@ -587,6 +587,7 @@ namespace MTConnect
         public TimeSeries(string name, double rate = 0.0)
             : base(name)
         {
+            mNewLine = true;
             Rate = rate;
         }
 

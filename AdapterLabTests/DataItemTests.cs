@@ -93,5 +93,12 @@ namespace AdapterLabTests
 
             Assert.AreEqual("ts|10||1 2 3 4 5 6 7 8 9 10", s.ToString());
         }
+
+        [TestMethod]
+        public void time_series_should_be_on_a_new_line()
+        {
+            TimeSeries s = new TimeSeries("ts");
+            Assert.IsTrue(s.NewLine);
+        }
     }
 }
