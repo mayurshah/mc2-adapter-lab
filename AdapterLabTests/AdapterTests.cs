@@ -168,7 +168,7 @@ namespace AdapterLabTests
             byte[] buffer = new byte[1024];
             int count = stream.Read(buffer, 0, 1024);
             String line = encoder.GetString(buffer, 0, count);
-            Assert.IsTrue(line.EndsWith("cond|FAULT|A Fault|111||\n"));
+            Assert.IsTrue(line.EndsWith("cond|FAULT|111|||A Fault\n"));
         }
 
         [TestMethod]
@@ -228,7 +228,7 @@ namespace AdapterLabTests
             byte[] buffer = new byte[1024];
             int count = stream.Read(buffer, 0, 1024);
             String line = encoder.GetString(buffer, 0, count);
-            Assert.IsTrue(line.EndsWith("cond|NORMAL||111||\n"));
+            Assert.IsTrue(line.EndsWith("cond|NORMAL|111|||\n"));
         }
 
         [TestMethod]
@@ -348,7 +348,7 @@ namespace AdapterLabTests
             byte[] buffer = new byte[1024];
             int count = stream.Read(buffer, 0, 1024);
             String line = encoder.GetString(buffer, 0, count);
-            Assert.IsTrue(line.EndsWith("cond|NORMAL||111||\n"));
+            Assert.IsTrue(line.EndsWith("cond|NORMAL|111|||\n"));
         }
 
         [TestMethod]

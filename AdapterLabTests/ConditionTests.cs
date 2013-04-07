@@ -40,12 +40,12 @@ namespace AdapterLabTests
         public void should_include_newly_added_activations()
         {
             c.Begin();
-            c.Add(Condition.Level.WARNING, "text", "code");
+            c.Add(Condition.Level.WARNING, "text", "code", "HIGH", "1123");
             c.Prepare();
             List<DataItem> list = c.ItemList();
 
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("c|WARNING|text|code||", list[0].ToString());
+            Assert.AreEqual("c|WARNING|code|1123|HIGH|text", list[0].ToString());
         }
 
         [TestMethod]
@@ -83,8 +83,8 @@ namespace AdapterLabTests
             c.Cleanup();
 
             Assert.AreEqual(2, list.Count);
-            Assert.AreEqual("c|NORMAL||code||", list[0].ToString());
-            Assert.AreEqual("c|WARNING|text|code2||", list[1].ToString());
+            Assert.AreEqual("c|NORMAL|code|||", list[0].ToString());
+            Assert.AreEqual("c|WARNING|code2|||text", list[1].ToString());
         }
 
         [TestMethod]
@@ -106,10 +106,10 @@ namespace AdapterLabTests
             c.Cleanup();
 
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("c|NORMAL||code1||", list[0].ToString());
+            Assert.AreEqual("c|NORMAL|code1|||", list[0].ToString());
             list = c.ItemList(true);
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("c|FAULT|text|code2||", list[0].ToString());
+            Assert.AreEqual("c|FAULT|code2|||text", list[0].ToString());
 
             c.Begin();
             c.Add(Condition.Level.FAULT, "text", "code2");
@@ -121,7 +121,7 @@ namespace AdapterLabTests
 
             list = c.ItemList(true);
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("c|FAULT|text|code2||", list[0].ToString());
+            Assert.AreEqual("c|FAULT|code2|||text", list[0].ToString());
 
             c.Begin();
             c.Prepare();
@@ -150,7 +150,7 @@ namespace AdapterLabTests
 
             list = s.ItemList(true);
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("s|WARNING|text|code||", list[0].ToString());
+            Assert.AreEqual("s|WARNING|code|||text", list[0].ToString());
         }
 
         [TestMethod]
@@ -163,7 +163,7 @@ namespace AdapterLabTests
             s.Cleanup();
 
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("s|WARNING|text|code||", list[0].ToString());
+            Assert.AreEqual("s|WARNING|code|||text", list[0].ToString());
 
             s.Clear("code");
             list = s.ItemList(true);
@@ -175,15 +175,15 @@ namespace AdapterLabTests
         public void simple_conditions_should_clear_one_code_when_multiple_are_present()
         {
             s.Begin();
-            s.Add(Condition.Level.WARNING, "text", "code1");
-            s.Add(Condition.Level.FAULT, "text", "code2");
+            s.Add(Condition.Level.WARNING, "text1", "code1");
+            s.Add(Condition.Level.FAULT, "text2", "code2");
             s.Prepare();
             List<DataItem> list = s.ItemList();
             s.Cleanup();
 
             Assert.AreEqual(2, list.Count);
-            Assert.AreEqual("s|WARNING|text|code1||", list[0].ToString());
-            Assert.AreEqual("s|FAULT|text|code2||", list[1].ToString());
+            Assert.AreEqual("s|WARNING|code1|||text1", list[0].ToString());
+            Assert.AreEqual("s|FAULT|code2|||text2", list[1].ToString());
 
             s.Begin();
             s.Clear("code1");
@@ -192,11 +192,11 @@ namespace AdapterLabTests
             s.Cleanup();
 
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("s|NORMAL||code1||", list[0].ToString());
+            Assert.AreEqual("s|NORMAL|code1|||", list[0].ToString());
 
             list = s.ItemList(true);
             Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("s|FAULT|text|code2||", list[0].ToString());
+            Assert.AreEqual("s|FAULT|code2|||text2", list[0].ToString());
         }
     }
 }

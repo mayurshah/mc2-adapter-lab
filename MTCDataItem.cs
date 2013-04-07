@@ -282,7 +282,7 @@ namespace MTConnect
 
             public override string ToString()
             {
-                return mName + "|" + Enum.GetName(mLevel.GetType(), mLevel) + "|" + mText + "|" + mNativeCode + "|" + mNativeSeverity + "|" + mQualifier;
+                return mName + "|" + Enum.GetName(mLevel.GetType(), mLevel) + "|" + mNativeCode + "|" + mNativeSeverity + "|" + mQualifier + "|" + mText;
             }
 
             /// <summary>
