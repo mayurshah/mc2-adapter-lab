@@ -18,19 +18,28 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework.Constraints;
 
-namespace AdapterLabTests
+
+namespace NUnit.AdapterLabTests
 {
     using MTConnect;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class DataItemTests
     {
-        Event e = new Event("test");
-        Message m = new Message("m");
+        Event e;
+        Message m;
 
-        [TestMethod]
+        [SetUp]
+        public void setup()
+        {
+            e = new Event("test");
+            m = new Message("m");
+        }
+
+        [Test]
         public void should_track_changed_state()
         {
             Assert.AreEqual(true, e.Changed);
@@ -44,7 +53,7 @@ namespace AdapterLabTests
             Assert.AreEqual("AAA", e.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void should_format_text()
         {
             Assert.AreEqual("test|UNAVAILABLE", e.ToString());
@@ -54,19 +63,19 @@ namespace AdapterLabTests
             Assert.AreEqual("s|12.34", s.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void newline_should_be_false_for_an_event()
         {
             Assert.AreEqual(false, e.NewLine);
         }
 
-        [TestMethod]
+        [Test]
         public void message_should_be_on_a_new_line()
         {
             Assert.AreEqual(true, m.NewLine);
         }
 
-        [TestMethod]
+        [Test]
         public void message_should_have_code_and_value()
         {
             m.Code = "XXX";
@@ -75,7 +84,7 @@ namespace AdapterLabTests
             Assert.AreEqual("m|XXX|text", m.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void time_series_should_have_rate_count_and_values()
         {
             TimeSeries s = new TimeSeries("ts", 100);
@@ -85,7 +94,7 @@ namespace AdapterLabTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void time_series_should_have_count_and_values_without_rate()
         {
             TimeSeries s = new TimeSeries("ts");
@@ -94,7 +103,7 @@ namespace AdapterLabTests
             Assert.AreEqual("ts|10||1 2 3 4 5 6 7 8 9 10", s.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void time_series_should_be_on_a_new_line()
         {
             TimeSeries s = new TimeSeries("ts");

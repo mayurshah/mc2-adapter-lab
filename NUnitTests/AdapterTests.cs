@@ -18,43 +18,45 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
 using System.Net.Sockets;
 using System.IO;
+using NUnit.Framework.Constraints;
 
-namespace AdapterLabTests
+namespace NUnit.AdapterLabTests
 {
     using MTConnect;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class AdapterTests
     {
         Adapter adapter;
         ASCIIEncoding encoder = new ASCIIEncoding();
-        Stream stream = new MemoryStream(2048);
+        Stream stream;
 
-        [TestInitialize]
+        [SetUp]
         public void initialize()
         {
+            stream = new MemoryStream(2048);
             adapter = new Adapter(0);
             adapter.Start();
             while (!adapter.Running) Thread.Sleep(10);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void cleanup()
         {
             adapter.Stop();
         }
 
-        [TestMethod]
+        [Test]
         public void should_have_a_non_zero_port()
         {
             Assert.AreNotEqual(0, adapter.ServerPort);
         }
 
-        [TestMethod]
+        [Test]
         public void should_receive_initial_data_when_connected()
         {
             Event avail = new Event("avail");
@@ -71,7 +73,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("avail|AVAILABLE\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void should_receive_updates_when_data_item_changes()
         {
             Event avail = new Event("avail");
@@ -96,7 +98,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("avail|UNAVAILABLE\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void should_combine_multiple_data_items_on_one_line()
         {
             Event avail = new Event("avail");
@@ -118,7 +120,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("avail|AVAILABLE|estop|ARMED\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void should_put_messages_on_separate_lines()
         {
             Event avail = new Event("avail");
@@ -145,7 +147,7 @@ namespace AdapterLabTests
             Assert.AreEqual(0, lines[2].Length);
         }
 
-        [TestMethod]
+        [Test]
         public void should_send_condition_on_fault()
         {
             Event avail = new Event("avail");
@@ -171,7 +173,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("cond|FAULT|111|||A Fault\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void should_send_normal_when_fault_is_not_reasserted()
         {
             Event avail = new Event("avail");
@@ -200,7 +202,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("cond|NORMAL||||\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void should_send_normal_for_single_fault_when_more_than_one_are_active()
         {
             Event avail = new Event("avail");
@@ -231,7 +233,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("cond|NORMAL|111|||\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void should_send_normal_when_last_active_condition_is_cleared()
         {
             Event avail = new Event("avail");
@@ -265,7 +267,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("cond|NORMAL||||\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void should_not_clear_a_simple_condition()
         {
             Event avail = new Event("avail");
@@ -290,7 +292,7 @@ namespace AdapterLabTests
             Assert.AreEqual(pos, stream.Position);
         }
 
-        [TestMethod]
+        [Test]
         public void should_manually_clear_condition()
         {
             Event avail = new Event("avail");
@@ -320,7 +322,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("cond|NORMAL||||\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void shoud_manually_clear_one_condition_when_multiple_are_present()
         {
             Event avail = new Event("avail");
@@ -351,7 +353,7 @@ namespace AdapterLabTests
             Assert.IsTrue(line.EndsWith("cond|NORMAL|111|||\n"));
         }
 
-        [TestMethod]
+        [Test]
         public void should_send_cutting_tool()
         {
             Event avail = new Event("avail");

@@ -6,3 +6,5 @@ TestResults
 *.suo
 *.exe
 *.obj
+Tests.VisualState.xml
+TestResult.xml

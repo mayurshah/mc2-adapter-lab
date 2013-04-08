@@ -22,20 +22,21 @@ using System.Xml.XPath;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework.Constraints;
 
-namespace AdapterLabTests
+namespace NUnit.AdapterLabTests
 {
     using MTConnect;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class CuttingToolTests
     {
         UTF8Encoding encoder = new UTF8Encoding();
         StringBuilder result;
         XmlWriter writer;
 
-        [TestInitialize]
+        [SetUp]
         public void initialize()
         {
             result = new StringBuilder();
@@ -43,7 +44,7 @@ namespace AdapterLabTests
             writer.WriteStartDocument();
         }
 
-        [TestMethod]
+        [Test]
         public void should_create_xml_document()
         {
             CuttingTool tool = new CuttingTool("12345", "AAAA", "12345");
@@ -54,12 +55,12 @@ namespace AdapterLabTests
             writer.Close();
 
             XElement cuttingTool = XElement.Parse(result.ToString());
-            Assert.AreEqual("CuttingTool", cuttingTool.Name);
+            Assert.AreEqual("CuttingTool", cuttingTool.Name.ToString());
             Assert.AreEqual("12345", cuttingTool.Attributes("assetId").First().Value);
             Assert.AreEqual("A tool description", cuttingTool.XPathSelectElement("//Description").Value);
         }
 
-        [TestMethod]
+        [Test]
         public void should_add_a_generic_property()
         {
             CuttingTool tool = new CuttingTool("12345", "AAAA", "12345");
@@ -82,7 +83,7 @@ namespace AdapterLabTests
             Assert.AreEqual("2500", prop.Value);
         }
 
-        [TestMethod]
+        [Test]
         public void should_add_a_status()
         {
             CuttingTool tool = new CuttingTool("12345", "AAAA", "12345");
@@ -104,7 +105,7 @@ namespace AdapterLabTests
             Assert.AreEqual("MEASURED", ((XElement)next).Value);
         }
 
-        [TestMethod]
+        [Test]
         public void should_add_a_measurement()
         {
             CuttingTool tool = new CuttingTool("12345", "AAAA", "12345");
@@ -131,7 +132,7 @@ namespace AdapterLabTests
             Assert.AreEqual("120.65", bdx.Value);            
         }
 
-        [TestMethod]
+        [Test]
         public void should_add_tool_life()
         {
             CuttingTool tool = new CuttingTool("12345", "AAAA", "12345");
@@ -157,7 +158,7 @@ namespace AdapterLabTests
             Assert.AreEqual("UP", life.Attribute("countDirection").Value);
         }
 
-        [TestMethod]
+        [Test]
         public void should_add_cutting_item()
         {
             CuttingTool tool = new CuttingTool("12345", "AAAA", "12345");

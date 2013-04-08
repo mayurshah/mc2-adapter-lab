@@ -18,25 +18,33 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework.Constraints;
 
-namespace AdapterLabTests
+namespace NUnit.AdapterLabTests
 {
     using MTConnect;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class ConditionTests
     {
-        Condition c = new Condition("c");
-        Condition s = new Condition("s", true);
+        Condition c;
+        Condition s;
+        
+        [SetUp]
+        public void setup()
+        {
+            c = new Condition("c");
+            s = new Condition("s", true);
+        }
 
-        [TestMethod]
+        [Test]
         public void should_require_a_newline()
         {
             Assert.AreEqual(true, c.NewLine);
         }
 
-        [TestMethod]
+        [Test]
         public void should_include_newly_added_activations()
         {
             c.Begin();
@@ -48,7 +56,7 @@ namespace AdapterLabTests
             Assert.AreEqual("c|WARNING|code|1123|HIGH|text", list[0].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void should_remove_old_activations_after_cleanup()
         {
             c.Begin();
@@ -68,7 +76,7 @@ namespace AdapterLabTests
             Assert.AreEqual(1, list.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void should_remove_old_activations_and_add_new()
         {
             c.Begin();
@@ -87,7 +95,7 @@ namespace AdapterLabTests
             Assert.AreEqual("c|WARNING|code2|||text", list[1].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void should_remove_only_old_activations()
         {
             c.Begin();
@@ -133,7 +141,7 @@ namespace AdapterLabTests
         }
 
 
-        [TestMethod]
+        [Test]
         public void simple_conditions_should_not_mark_and_sweep()
         {
             s.Begin();
@@ -153,7 +161,7 @@ namespace AdapterLabTests
             Assert.AreEqual("s|WARNING|code|||text", list[0].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void simple_conditions_should_be_cleared_manually()
         {
             s.Begin();
@@ -171,7 +179,7 @@ namespace AdapterLabTests
             Assert.AreEqual("s|NORMAL||||", list[0].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void simple_conditions_should_clear_one_code_when_multiple_are_present()
         {
             s.Begin();
