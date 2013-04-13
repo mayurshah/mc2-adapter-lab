@@ -41,6 +41,7 @@ namespace AdapterLab
         {
             CuttingTool tool = new CuttingTool(assetId.Text, toolId.Text, serialNumber.Text);
             tool.Description = description.Text;
+            tool.Manufacturers = manufacturers.Text;
 
             List<string> status = new List<string>();
             if (statusUsed.Checked)

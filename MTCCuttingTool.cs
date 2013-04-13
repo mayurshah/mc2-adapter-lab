@@ -348,6 +348,7 @@ namespace MTConnect
         public string SerialNumber { set; get; }
         public string ToolId { set; get; }
         public string Description { set; get; }
+        public string Manufacturers { set; get; }
 
         protected HashSet<Property> mProperties = new HashSet<Property>();
         protected HashSet<Measurement> mMeasurements = new HashSet<Measurement>();
@@ -490,6 +491,8 @@ namespace MTConnect
             writer.WriteStartElement("CuttingTool");
                 writer.WriteAttributeString("toolId", ToolId);
                 writer.WriteAttributeString("serialNumber", SerialNumber);
+                if (Manufacturers != null)
+                    writer.WriteAttributeString("manufactures", Manufacturers);
                 base.ToXml(writer);
 
                 writer.WriteElementString("Description", Description);

@@ -49,6 +49,7 @@ namespace NUnit.AdapterLabTests
         {
             CuttingTool tool = new CuttingTool("12345", "AAAA", "12345");
             tool.Description = "A tool description";
+            tool.Manufacturers = "SMPY";
 
             tool.ToXml(writer);
             writer.WriteEndDocument();
@@ -58,6 +59,7 @@ namespace NUnit.AdapterLabTests
             Assert.AreEqual("CuttingTool", cuttingTool.Name.ToString());
             Assert.AreEqual("12345", cuttingTool.Attributes("assetId").First().Value);
             Assert.AreEqual("A tool description", cuttingTool.XPathSelectElement("//Description").Value);
+            Assert.AreEqual("SMPY", cuttingTool.Attributes("manufactures").First().Value);
         }
 
         [Test]
